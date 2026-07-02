@@ -3,253 +3,328 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>ごはん便り | 家族の味を一冊に残すサービス</title>
-    <meta
-      name="description"
-      content="ごはん便りは、親や祖父母のいつもの味を聞き取り、思い出や言葉までレシピ本として残すワークシートキットサービスです。"
-    />
+    <title>ごはん便り 編集室</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <header class="site-header">
-      <a class="brand" href="#top">ごはん便り</a>
-      <nav aria-label="ページ内メニュー">
-        <a href="#flow">流れ</a>
-        <a href="#kit">届くもの</a>
-        <a href="#book">完成本</a>
-        <a href="#apply">申し込み</a>
-      </nav>
-    </header>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <p class="eyebrow">Back office</p>
+        <h1>ごはん便り<br />編集室</h1>
+        <p>返送されたワークシートを読み取り、家族の言葉を残したままレシピ本のページへ整えます。</p>
+        <nav aria-label="作業ステップ">
+          <button class="nav-step is-active" data-nav="dashboard">受付一覧</button>
+          <button class="nav-step" data-nav="upload">画像読取</button>
+          <button class="nav-step" data-nav="review">確認・修正</button>
+          <button class="nav-step" data-nav="layout">ページ整頓</button>
+          <button class="nav-step" data-nav="proof">最終確認</button>
+          <button class="nav-step" data-nav="book">本プレビュー</button>
+        </nav>
+      </aside>
 
-    <main id="top">
-      <section class="hero-section">
-        <div class="hero-media" aria-hidden="true"></div>
-        <div class="hero-copy">
-          <p class="eyebrow">聞き取りワークシートキット</p>
-          <h1>ごはん便り</h1>
-          <p class="hero-lead">家族の味を聞き取り、一家に一冊のレシピ本にして継承する。</p>
-          <p class="hero-sub">
-            親や祖父母の“いつもの味”を、材料や手順だけでなく、思い出や言葉まで残すサービスです。
-          </p>
-          <div class="hero-actions">
-            <a class="button primary" href="#apply">ワークシートを取り寄せる</a>
-            <a class="button secondary" href="#flow">サービスの流れを見る</a>
+      <main class="workspace">
+        <section class="screen is-active" data-screen="dashboard">
+          <header class="screen-head">
+            <div>
+              <p class="eyebrow">Returned worksheets</p>
+              <h2>返送ワークシート一覧</h2>
+            </div>
+            <div class="summary-card">
+              <strong>5</strong>
+              <span>進行中の依頼</span>
+            </div>
+          </header>
+
+          <div class="table-card">
+            <table>
+              <thead>
+                <tr>
+                  <th>依頼者名</th>
+                  <th>家族名</th>
+                  <th>料理名</th>
+                  <th>聞き取り相手</th>
+                  <th>返送日</th>
+                  <th>ステータス</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>福山菜々美</td>
+                  <td>福山家</td>
+                  <td>おばあちゃんの煮物</td>
+                  <td>おばあちゃん</td>
+                  <td>2026/07/01</td>
+                  <td><span class="status warn">要確認</span></td>
+                  <td><button class="small-button" data-action="edit-work">編集する</button></td>
+                </tr>
+                <tr>
+                  <td>山田花子</td>
+                  <td>山田家</td>
+                  <td>お母さんの豚汁</td>
+                  <td>お母さん</td>
+                  <td>2026/06/30</td>
+                  <td><span class="status idle">未読み取り</span></td>
+                  <td><button class="small-button" data-action="edit-work">編集する</button></td>
+                </tr>
+                <tr>
+                  <td>佐藤太郎</td>
+                  <td>佐藤家</td>
+                  <td>父の休日カレー</td>
+                  <td>お父さん</td>
+                  <td>2026/06/28</td>
+                  <td><span class="status done">レシピページ作成済み</span></td>
+                  <td><button class="small-button" data-action="edit-work">編集する</button></td>
+                </tr>
+                <tr>
+                  <td>木村真由</td>
+                  <td>木村家</td>
+                  <td>祖父の焼きおにぎり</td>
+                  <td>おじいちゃん</td>
+                  <td>2026/06/27</td>
+                  <td><span class="status edit">編集中</span></td>
+                  <td><button class="small-button" data-action="edit-work">編集する</button></td>
+                </tr>
+                <tr>
+                  <td>井上遥</td>
+                  <td>井上家</td>
+                  <td>母のちらし寿司</td>
+                  <td>お母さん</td>
+                  <td>2026/06/25</td>
+                  <td><span class="status ready">製本準備完了</span></td>
+                  <td><button class="small-button" data-action="edit-work">編集する</button></td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-        </div>
-        <div class="hero-kit" aria-label="ごはん便りキットのイメージ">
-          <span class="box-label">ごはん便りキット</span>
-          <div class="paper-stack">
-            <p>聞き取りワークシート</p>
-            <strong>材料 / 手順 / 思い出</strong>
+        </section>
+
+        <section class="screen" data-screen="upload">
+          <header class="screen-head">
+            <div>
+              <p class="eyebrow">Scan worksheet</p>
+              <h2>ワークシート画像をアップロード</h2>
+            </div>
+            <button class="ghost-button" data-screen-link="dashboard">一覧に戻る</button>
+          </header>
+
+          <div class="upload-layout">
+            <div class="upload-panel">
+              <label class="upload-box" for="worksheetFile">
+                <input id="worksheetFile" type="file" accept="image/*" />
+                <span>ファイルを選択</span>
+                <p>写真撮影またはスキャンしたワークシート画像を登録します。</p>
+              </label>
+              <input id="cameraFile" class="visually-hidden" type="file" accept="image/*" capture="environment" />
+              <button class="secondary-button camera-button" type="button" data-action="open-camera">
+                カメラで撮影
+              </button>
+              <div class="camera-panel" id="cameraPanel" hidden>
+                <video id="cameraVideo" autoplay playsinline muted></video>
+                <canvas id="cameraCanvas" hidden></canvas>
+                <div class="camera-actions">
+                  <button class="secondary-button" type="button" data-action="close-camera">閉じる</button>
+                  <button class="primary-button" type="button" data-action="capture-photo">撮影する</button>
+                </div>
+                <p id="cameraMessage">カメラが使えない場合は、ファイル選択で撮影済み画像を選んでください。</p>
+              </div>
+              <button class="secondary-button retake-button" type="button" data-action="retake-photo" hidden>
+                撮り直す
+              </button>
+              <button class="secondary-button reset-photo-button" type="button" data-action="reset-photo" hidden>
+                画像をリセット
+              </button>
+              <button class="primary-button" data-action="start-ocr">AIで読み取る</button>
+              <div class="loading-card" id="loadingCard" hidden>
+                <div class="loader"></div>
+                <p>手書きの文字を読み取り、項目ごとに整理しています。</p>
+              </div>
+            </div>
+            <div class="worksheet-preview">
+              <img id="worksheetPreview" src="assets/worksheet-preview.png" alt="アップロードされたワークシート画像" />
+            </div>
           </div>
-          <div class="memo-card">返信用封筒入り</div>
-        </div>
-      </section>
+        </section>
 
-      <section class="section problem-section">
-        <div class="narrow">
-          <p class="eyebrow">Before it fades</p>
-          <h2>その味、いつか聞けなくなる前に。</h2>
-          <p>
-            おばあちゃんの煮物、どうやって作っていたんだろう。お母さんの豚汁の味、ちゃんと聞いたことがなかった。
-            家族の味は、日常の中にありすぎて、記録されないまま失われていくことがあります。
-          </p>
-          <p class="question">あなたの家にも、残しておきたい味はありませんか？</p>
-        </div>
-      </section>
+        <section class="screen" data-screen="review">
+          <header class="screen-head">
+            <div>
+              <p class="eyebrow">AI reading result</p>
+              <h2>読み取り結果確認・修正</h2>
+            </div>
+            <button class="ghost-button" data-screen-link="upload">元の画像を見る</button>
+          </header>
 
-      <section class="section flow-section" id="flow">
-        <div class="section-head">
-          <p class="eyebrow">How it works</p>
-          <h2>ごはん便りの流れ</h2>
-        </div>
-        <div class="flow-grid">
-          <article class="flow-card">
-            <span>1</span>
-            <h3>届く</h3>
-            <p>聞き取りワークシートセットが自宅に届きます。</p>
-          </article>
-          <article class="flow-card">
-            <span>2</span>
-            <h3>聞く</h3>
-            <p>親や祖父母に、料理の作り方や思い出を聞きます。</p>
-          </article>
-          <article class="flow-card">
-            <span>3</span>
-            <h3>書く</h3>
-            <p>材料、手順、味のコツ、思い出、残したい言葉をワークシートに記録します。</p>
-          </article>
-          <article class="flow-card">
-            <span>4</span>
-            <h3>送る</h3>
-            <p>書き終えたワークシートを返送します。</p>
-          </article>
-          <article class="flow-card featured">
-            <span>5</span>
-            <h3>本になる</h3>
-            <p>受託側がアプリとAIとの編集によって内容を整理し、一家に一冊のレシピ本としてお届けします。</p>
-          </article>
-        </div>
-      </section>
+          <div class="review-layout">
+            <form class="reading-form" id="readingForm">
+              <label>
+                <span>料理名 <em class="tag ok">読み取り完了</em></span>
+                <input id="dishName" value="おばあちゃんの煮物" />
+              </label>
+              <label>
+                <span>作ってくれた人 <em class="tag ok">読み取り完了</em></span>
+                <input id="cookPerson" value="おばあちゃん" />
+              </label>
+              <label>
+                <span>材料 <em class="tag ok">読み取り完了</em></span>
+                <textarea id="ingredients" rows="3">大根、にんじん、こんにゃく、鶏肉、しょうゆ、みりん、砂糖</textarea>
+              </label>
+              <label>
+                <span>分量 <em class="tag warn">要確認</em></span>
+                <textarea id="amounts" rows="6">大根 1/2本
+にんじん 1本
+こんにゃく 1枚
+鶏肉 200g
+しょうゆ 大さじ2くらい
+みりん 大さじ2くらい
+砂糖 少し</textarea>
+              </label>
+              <label>
+                <span>手順 <em class="tag ok">読み取り完了</em></span>
+                <textarea id="steps" rows="5">1. 野菜を食べやすい大きさに切る
+2. 鍋で具材を軽く炒める
+3. 調味料を入れて煮込む
+4. 味がしみるまで少し置く</textarea>
+              </label>
+              <label>
+                <span>味のコツ・ポイント <em class="tag note">補足が必要</em></span>
+                <textarea id="tips" rows="3">少し甘めにするのが家の味。味見しながら調整する。</textarea>
+              </label>
+              <label>
+                <span>料理にまつわる思い出 <em class="tag ok">読み取り完了</em></span>
+                <textarea id="memory" rows="3">家族が集まる日にいつも作っていた。弟がよくおかわりしていた。</textarea>
+              </label>
+              <label>
+                <span>家族に残したい一言 <em class="tag ok">読み取り完了</em></span>
+                <textarea id="quote" rows="2">みんなで食べると、いつもの味が一番おいしい。</textarea>
+              </label>
+            </form>
 
-      <section class="section kit-section" id="kit">
-        <div class="section-head">
-          <p class="eyebrow">Worksheet kit</p>
-          <h2>届くもの</h2>
-          <p>
-            スマホが苦手な親や祖父母でも参加しやすく、ヒアリングもしやすい、紙のワークシートで聞き取りを行います。
-          </p>
-        </div>
-        <div class="kit-layout">
-          <div class="shipping-box" aria-hidden="true">
-            <div class="box-flap"></div>
-            <p>ごはん便り</p>
+            <aside class="ai-comments">
+              <h3>AI補助コメント</h3>
+              <p>“少し”という表現があります。大さじ・小さじ、または見た目の目安を補足すると、レシピ本として分かりやすくなります。</p>
+              <p>味のコツは読み取れていますが、「どのくらい甘めか」を人が確認すると、再現しやすくなります。</p>
+              <p>思い出欄は読み取れています。家族らしい表現なので、できるだけそのまま残すことをおすすめします。</p>
+              <div class="action-stack">
+                <button class="secondary-button" data-action="save-review">修正を保存</button>
+                <button class="primary-button" data-action="make-layout">レシピページに整える</button>
+              </div>
+              <p class="save-message" id="saveMessage" role="status"></p>
+            </aside>
           </div>
-          <div class="kit-grid">
-            <article>聞き取りワークシート複数枚</article>
-            <article>聞き方ガイド</article>
-            <article>写真貼り付けカード</article>
-            <article>返信用封筒</article>
-            <article>完成本のサンプルイメージ</article>
-          </div>
-        </div>
-      </section>
+        </section>
 
-      <section class="section worksheet-section">
-        <div class="section-head">
-          <p class="eyebrow">Inside the sheet</p>
-          <h2>レシピだけでなく、思い出まで聞き取る。</h2>
-        </div>
-        <div class="worksheet-layout">
-          <div class="worksheet-image-card">
-            <img src="assets/worksheet-preview.png" alt="ごはん便りの聞き取りワークシート" />
-          </div>
-          <div class="worksheet-card">
-            <h3>ワークシート項目</h3>
-            <ul class="two-column-list">
-              <li>料理名</li>
-              <li>作ってくれた人</li>
-              <li>材料</li>
-              <li>分量</li>
-              <li>手順</li>
-              <li>味のコツ・ポイント</li>
-              <li>料理にまつわる思い出</li>
-              <li>家族に残したい一言</li>
-            </ul>
-          </div>
-          <div class="question-card">
-            <h3>質問例</h3>
-            <p>「この料理の味のコツはどこ？」</p>
-            <p>「分量は、いつもどれくらい入れていた？」</p>
-            <p>「この料理には、どんな思い出がある？」</p>
-            <p>「この料理を未来の家族に伝えるなら、どんな言葉を添えたい？」</p>
-          </div>
-        </div>
-      </section>
+        <section class="screen" data-screen="layout">
+          <header class="screen-head">
+            <div>
+              <p class="eyebrow">Page layout</p>
+              <h2>1レシピ1ページに整える</h2>
+            </div>
+            <button class="ghost-button" data-screen-link="review">読み取り結果に戻る</button>
+          </header>
 
-      <section class="section edit-section">
-        <div class="edit-panel">
-          <p class="eyebrow">AI + human editing</p>
-          <h2>AIは、家族の言葉を整える補助役です。</h2>
-          <p>
-            返送されたワークシートをもとに、AIが材料、手順、思い出を整理し、読みやすいレシピページの下書きを作成します。
-            最後は人の目で確認し、家族らしい言葉や温度感が失われないように、一冊の本に仕上げます。
-          </p>
-        </div>
-      </section>
-
-      <section class="section book-section" id="book">
-        <div class="section-head">
-          <p class="eyebrow">Finished book</p>
-          <h2>一家に一冊、家族の味の本。</h2>
-        </div>
-        <div class="book-preview">
-          <div class="book-cover">
-            <p>福山家の味の記録</p>
-            <h3>ごはん便り</h3>
+          <div class="layout-stage">
+            <article class="recipe-sheet" id="layoutPreview"></article>
+            <aside class="layout-notes">
+              <h3>整頓方針</h3>
+              <ul>
+                <li>写真、材料、分量、手順、思い出を1ページに収める</li>
+                <li>思い出や一言は、元の言葉の温度感を残す</li>
+                <li>曖昧な分量は、要確認のまま人が判断できるように残す</li>
+              </ul>
+              <button class="primary-button" data-action="go-proof">人の目で最終確認する</button>
+            </aside>
           </div>
-          <article class="recipe-page">
-            <p class="page-label">Recipe 01</p>
-            <h3>おばあちゃんの煮物</h3>
-            <dl>
-              <dt>作った人</dt>
-              <dd>おばあちゃん</dd>
-              <dt>材料</dt>
-              <dd>大根、にんじん、こんにゃく、鶏肉、醤油、みりん、砂糖</dd>
-              <dt>味のコツ</dt>
-              <dd>味見をしながら、少し甘めにするのが家の味。</dd>
-              <dt>思い出</dt>
-              <dd>家族が集まる日にいつも作っていた料理。弟がよくおかわりしていた。</dd>
-              <dt>残したい言葉</dt>
-              <dd>みんなで食べると、いつもの味が一番おいしい。</dd>
-            </dl>
-          </article>
-        </div>
-      </section>
+        </section>
 
-      <section class="section compare-section">
-        <div class="section-head">
-          <p class="eyebrow">Difference</p>
-          <h2>普通のレシピ本では残せないもの。</h2>
-        </div>
-        <div class="compare-table" role="table" aria-label="類似サービスとの差別化">
-          <div role="row">
-            <strong role="cell">普通のレシピアプリ</strong>
-            <span role="cell">材料や手順を保存する</span>
-            <strong role="cell">ごはん便り</strong>
-            <span role="cell">料理の作り方だけでなく、作ってきた人の言葉、家族の思い出、味の背景まで残す</span>
+        <section class="screen" data-screen="proof">
+          <header class="screen-head">
+            <div>
+              <p class="eyebrow">Human proofing</p>
+              <h2>人による最終確認</h2>
+            </div>
+            <button class="ghost-button" data-screen-link="layout">ページ整頓に戻る</button>
+          </header>
+
+          <div class="proof-alert">
+            <p>家族らしい言葉を残すため、AIが整えた文章は必ず人の目で確認します。</p>
+            <p>思い出や一言は、できるだけ元の言葉を活かして編集してください。</p>
           </div>
-          <div role="row">
-            <strong role="cell">普通のアルバム</strong>
-            <span role="cell">写真を残す</span>
-            <strong role="cell">ごはん便り</strong>
-            <span role="cell">料理をきっかけに、家族の会話や記憶を残す</span>
+
+          <div class="proof-layout">
+            <article class="original-card">
+              <h3>読み取った元の内容</h3>
+              <dl id="originalText"></dl>
+            </article>
+            <article class="recipe-sheet compact" id="proofPreview"></article>
           </div>
-        </div>
-      </section>
 
-      <section class="section scenes-section">
-        <div class="section-head">
-          <p class="eyebrow">Scenes</p>
-          <h2>こんな時に</h2>
-        </div>
-        <div class="scene-grid">
-          <article>実家に帰った時に、母の味を聞いておく</article>
-          <article>敬老の日や母の日の贈り物として</article>
-          <article>一人暮らしを始める前に、家族の味を残す</article>
-          <article>家族が集まるタイミングで、みんなで一冊を作る</article>
-          <article>祖父母との会話のきっかけとして</article>
-        </div>
-      </section>
+          <div class="proof-actions">
+            <button class="secondary-button" data-action="keep-original">元の表現を残す</button>
+            <button class="secondary-button" data-action="soften-text">文章を少し整える</button>
+            <button class="secondary-button" data-screen-link="review">修正する</button>
+            <button class="primary-button" data-action="add-to-book">レシピ本に追加する</button>
+          </div>
+        </section>
 
-      <section class="section apply-section" id="apply">
-        <div class="apply-copy">
-          <p class="eyebrow">Request</p>
-          <h2>あなたの家の味を、一冊に残しませんか。</h2>
-          <p>現在はプロトタイプ段階のサービスです。</p>
-        </div>
-        <form class="apply-form" id="applyForm">
-          <label>
-            お名前
-            <input name="name" type="text" placeholder="福山 花子" required />
-          </label>
-          <label>
-            メールアドレス
-            <input name="email" type="email" placeholder="gohan@example.com" required />
-          </label>
-          <label>
-            聞きたい相手
-            <input name="person" type="text" placeholder="おばあちゃん" />
-          </label>
-          <button class="button primary" type="submit">ワークシートを取り寄せる</button>
-          <p class="form-message" id="formMessage" role="status"></p>
-        </form>
-      </section>
-    </main>
+        <section class="screen" data-screen="book">
+          <header class="screen-head">
+            <div>
+              <p class="eyebrow">Book preview</p>
+              <h2>レシピ本プレビュー</h2>
+            </div>
+            <span class="status ready">製本前確認</span>
+          </header>
 
-    <footer class="site-footer">
-      <p>ごはん便り - 家族の味と記憶を未来へ</p>
-    </footer>
+          <div class="book-layout">
+            <div class="book-cover">
+              <p>福山家の味の記録</p>
+              <h3>ごはん便り</h3>
+            </div>
+            <div class="toc-card">
+              <h3>目次</h3>
+              <ol id="bookToc">
+                <li>おばあちゃんの煮物</li>
+                <li>お母さんの豚汁</li>
+                <li>父の休日カレー</li>
+              </ol>
+              <h4>追加済みレシピ</h4>
+              <p class="saved-count" id="savedRecipeCount">3件のレシピが保存されています</p>
+              <div class="recipe-chips" id="savedRecipeChips">
+                <span>おばあちゃんの煮物</span>
+                <span>お母さんの豚汁</span>
+                <span>父の休日カレー</span>
+              </div>
+            </div>
+            <article class="recipe-sheet mini" id="bookRecipePreview"></article>
+          </div>
+
+          <div class="book-actions">
+            <button class="secondary-button" data-action="open-print-preview">PDFプレビュー</button>
+            <button class="secondary-button" data-action="book-message">製本データを作成</button>
+            <button class="primary-button" data-action="book-ready">製本準備完了にする</button>
+          </div>
+          <p class="complete-message" id="completeMessage" role="status"></p>
+        </section>
+
+        <section class="screen print-screen" data-screen="print">
+          <header class="screen-head no-print">
+            <div>
+              <p class="eyebrow">PDF print preview</p>
+              <h2>まとめてPDF印刷</h2>
+            </div>
+            <button class="ghost-button" data-screen-link="book">本プレビューに戻る</button>
+          </header>
+
+          <div class="print-guide no-print">
+            <p>保存済みレシピを、表紙 + 1レシピ1ページで印刷します。印刷画面で送信先を「PDFとして保存」にしてください。</p>
+            <button class="primary-button" data-action="print-all-recipes">PDFとして印刷する</button>
+          </div>
+
+          <div class="print-book" id="printBook"></div>
+        </section>
+      </main>
+    </div>
 
     <script src="script.js"></script>
   </body>
