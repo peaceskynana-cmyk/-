@@ -17,9 +17,33 @@ const bookRecipePreview = document.querySelector("#bookRecipePreview");
 const savedRecipeChips = document.querySelector("#savedRecipeChips");
 const savedRecipeCount = document.querySelector("#savedRecipeCount");
 const printBook = document.querySelector("#printBook");
+const bookCover = document.querySelector("#bookCover");
+const coverOptionsTarget = document.querySelector("#coverOptions");
+const coverChoiceSummary = document.querySelector("#coverChoiceSummary");
 
 let cameraStream = null;
 const defaultWorksheetImage = "assets/worksheet-preview.png";
+const coverOptions = [
+  {
+    id: "1",
+    className: "cover-classic",
+    name: "あたたかい食卓",
+    note: "家族の記録らしい、落ち着いた緑の表紙",
+  },
+  {
+    id: "2",
+    className: "cover-letter",
+    name: "手紙のように",
+    note: "やさしい紙色と罫線で、聞き書き感を残す表紙",
+  },
+  {
+    id: "3",
+    className: "cover-celebration",
+    name: "贈りもの",
+    note: "記念品として渡しやすい、明るい表紙",
+  },
+];
+let selectedCoverId = localStorage.getItem("gohan-editor-cover") || "1";
 
 const sampleRecipes = [
   {
@@ -70,6 +94,36 @@ function loadSavedRecipes() {
 
 function persistSavedRecipes() {
   localStorage.setItem("gohan-editor-recipes", JSON.stringify(savedRecipes));
+}
+
+function getSelectedCover() {
+  return coverOptions.find((cover) => cover.id === selectedCoverId) || coverOptions[0];
+}
+
+function renderCoverPreview() {
+  const selectedCover = getSelectedCover();
+  bookCover.className = `book-cover ${selectedCover.className}`;
+  coverChoiceSummary.textContent = `Googleフォーム入力番号: ${selectedCover.id} / ${selectedCover.name}`;
+}
+
+function renderCoverOptions() {
+  coverOptionsTarget.innerHTML = "";
+
+  coverOptions.forEach((cover) => {
+    const button = document.createElement("button");
+    button.className = `cover-option ${cover.className}`;
+    button.type = "button";
+    button.dataset.coverId = cover.id;
+    button.setAttribute("aria-pressed", String(cover.id === selectedCoverId));
+    button.innerHTML = `
+      <span class="cover-number">表紙 ${cover.id}</span>
+      <strong>${cover.name}</strong>
+      <small>${cover.note}</small>
+    `;
+    coverOptionsTarget.append(button);
+  });
+
+  renderCoverPreview();
 }
 
 async function openCamera() {
@@ -268,13 +322,14 @@ function addCurrentRecipeToBook() {
 
 function renderPrintBook() {
   printBook.innerHTML = "";
+  const selectedCover = getSelectedCover();
 
   const cover = document.createElement("article");
-  cover.className = "print-page print-cover";
+  cover.className = `print-page print-cover ${selectedCover.className}`;
   cover.innerHTML = `
     <p>ごはん便り</p>
     <h2>福山家の味の記録</h2>
-    <span>${savedRecipes.length}件のレシピ</span>
+    <span>表紙 ${selectedCover.id} / ${savedRecipes.length}件のレシピ</span>
   `;
   printBook.append(cover);
 
@@ -293,6 +348,7 @@ document.addEventListener("click", (event) => {
   const screenLink = event.target.closest("[data-screen-link]");
   const nav = event.target.closest("[data-nav]");
   const action = event.target.closest("[data-action]");
+  const coverChoice = event.target.closest("[data-cover-id]");
 
   if (screenLink) {
     if (screenLink.dataset.screenLink === "book") {
@@ -304,6 +360,13 @@ document.addEventListener("click", (event) => {
 
   if (nav) {
     showScreen(nav.dataset.nav);
+    return;
+  }
+
+  if (coverChoice) {
+    selectedCoverId = coverChoice.dataset.coverId;
+    localStorage.setItem("gohan-editor-cover", selectedCoverId);
+    renderCoverOptions();
     return;
   }
 
@@ -409,3 +472,4 @@ cameraInput.addEventListener("change", () => {
 });
 
 renderSavedRecipes();
+renderCoverOptions();

@@ -633,10 +633,26 @@ tr:last-child td {
   min-height: 400px;
   padding: 28px;
   color: #fff8ea;
+  border: 10px solid #fff8ea;
+}
+
+.cover-classic {
   background:
     radial-gradient(circle at 75% 22%, rgba(244, 200, 137, 0.32), transparent 8rem),
     linear-gradient(160deg, var(--green), #3f4b37);
-  border: 10px solid #fff8ea;
+}
+
+.cover-letter {
+  color: var(--wood);
+  background:
+    repeating-linear-gradient(0deg, transparent 0 28px, rgba(133, 86, 56, 0.14) 28px 29px),
+    linear-gradient(145deg, #fff8ea, #f1dcc0);
+}
+
+.cover-celebration {
+  background:
+    radial-gradient(circle at 50% 18%, rgba(255, 248, 234, 0.38), transparent 8rem),
+    linear-gradient(145deg, #c97843, #855638 62%, #30251d);
 }
 
 .book-cover p {
@@ -674,6 +690,81 @@ tr:last-child td {
   border-radius: 999px;
   font-size: 13px;
   font-weight: 900;
+}
+
+.cover-picker {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.55fr) minmax(0, 1.45fr);
+  gap: 18px;
+  margin-top: 22px;
+  padding: 20px;
+  background: rgba(255, 248, 234, 0.94);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+.cover-picker h3 {
+  margin-top: 6px;
+  color: var(--wood);
+  font-size: 24px;
+}
+
+.cover-picker p:not(.eyebrow) {
+  margin-top: 12px;
+  color: var(--green);
+  font-weight: 900;
+  line-height: 1.6;
+}
+
+.cover-options {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.cover-option {
+  display: grid;
+  align-content: end;
+  min-height: 180px;
+  padding: 14px;
+  overflow: hidden;
+  color: #fff8ea;
+  text-align: left;
+  border: 4px solid #fff8ea;
+  border-radius: 8px;
+  box-shadow: 0 10px 24px rgba(82, 55, 32, 0.12);
+}
+
+.cover-option.cover-letter {
+  color: var(--wood);
+}
+
+.cover-option[aria-pressed="true"] {
+  outline: 4px solid var(--orange);
+  outline-offset: 2px;
+}
+
+.cover-number {
+  width: max-content;
+  padding: 5px 8px;
+  color: var(--ink);
+  background: var(--paper);
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.cover-option strong {
+  margin-top: 24px;
+  font-size: 22px;
+  line-height: 1.25;
+}
+
+.cover-option small {
+  margin-top: 8px;
+  line-height: 1.55;
+  font-weight: 800;
 }
 
 .print-guide {
@@ -721,10 +812,11 @@ tr:last-child td {
   min-height: 1120px;
   color: #fff8ea;
   text-align: center;
-  background:
-    radial-gradient(circle at 50% 30%, rgba(244, 200, 137, 0.28), transparent 13rem),
-    linear-gradient(160deg, var(--green), #3f4b37);
   border: 16px solid #fff8ea;
+}
+
+.print-cover.cover-letter {
+  color: var(--wood);
 }
 
 .print-cover p {
@@ -784,6 +876,11 @@ tr:last-child td {
   .layout-stage,
   .proof-layout,
   .book-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .cover-picker,
+  .cover-options {
     grid-template-columns: 1fr;
   }
 

@@ -277,7 +277,7 @@
           </header>
 
           <div class="book-layout">
-            <div class="book-cover">
+            <div class="book-cover cover-classic" id="bookCover">
               <p>福山家の味の記録</p>
               <h3>ごはん便り</h3>
             </div>
@@ -298,6 +298,15 @@
             </div>
             <article class="recipe-sheet mini" id="bookRecipePreview"></article>
           </div>
+
+          <section class="cover-picker" aria-labelledby="coverPickerTitle">
+            <div>
+              <p class="eyebrow">Cover choice</p>
+              <h3 id="coverPickerTitle">依頼者が選べる表紙パターン</h3>
+              <p id="coverChoiceSummary">Googleフォーム入力番号: 1</p>
+            </div>
+            <div class="cover-options" id="coverOptions"></div>
+          </section>
 
           <div class="book-actions">
             <button class="secondary-button" data-action="open-print-preview">PDFプレビュー</button>
